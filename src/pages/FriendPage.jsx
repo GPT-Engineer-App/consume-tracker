@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Heading, Text, VStack, Flex, Image, Spacer } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+import AddItemForm from "../components/AddItemForm.jsx";
 
 const FriendPage = () => {
   const { friendName } = useParams();
@@ -14,6 +15,10 @@ const FriendPage = () => {
       { type: "Podcast", title: "How I Built This" },
     ]);
   }, [friendName]);
+  const handleAddItem = (newItem) => {
+    setItems([...items, newItem]);
+  };
+
   return (
     <Box maxWidth="600px" margin="auto" padding={4}>
       <Heading as="h1" size="xl" textAlign="center" marginBottom={8}>
@@ -35,6 +40,7 @@ const FriendPage = () => {
           </Flex>
         ))}
       </VStack>
+      <AddItemForm onAddItem={handleAddItem} />
     </Box>
   );
 };
